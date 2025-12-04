@@ -44,7 +44,7 @@ class Introduction extends StatelessWidget {
                   'Enjoy Listening To Music',
                   style: TextStyle(
                     fontSize: 18,
-                    color: Color(0xffDADADA),
+                    color: Palette.grey,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
