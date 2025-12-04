@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:spotify_futter/core/configs/assets/images.dart';
 import 'package:spotify_futter/core/configs/theme/palette.dart';
 import 'package:spotify_futter/ui/components/button.dart';
+import 'package:spotify_futter/ui/pages/choose_mode/choose_mode.dart';
 
 import '../../../core/configs/assets/vectors.dart';
 
@@ -59,7 +60,14 @@ class Introduction extends StatelessWidget {
                 SizedBox(height: 20),
 
                 CustomButton(
-                  onPressed: () => {},
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => ChooseModePage(),
+                      ),
+                    );
+                  },
                   title: 'Get Started',
                   height: 80,
                 ),
