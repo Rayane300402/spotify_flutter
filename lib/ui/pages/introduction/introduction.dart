@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:spotify_futter/core/configs/assets/images.dart';
 import 'package:spotify_futter/core/configs/theme/palette.dart';
 import 'package:spotify_futter/ui/components/button.dart';
+import 'package:spotify_futter/ui/components/logo.dart';
 import 'package:spotify_futter/ui/pages/choose_mode/choose_mode.dart';
 
 import '../../../core/configs/assets/vectors.dart';
@@ -33,17 +34,14 @@ class Introduction extends StatelessWidget {
             padding: const EdgeInsets.all(40),
             child: Column(
               children: [
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: SvgPicture.asset(Vectors.logo),
-                ),
+                Logo(),
 
                 Spacer(),
 
                 Text(
                   'Enjoy Listening To Music',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 26,
                     color: Palette.grey,
                     fontWeight: FontWeight.bold,
                   ),
@@ -53,7 +51,7 @@ class Introduction extends StatelessWidget {
 
                 Text(
                   'Listen to songs, play podcasts, create playlists and discover music you\'ll love.',
-                  style: TextStyle(fontSize: 16, color: Color(0xff797979)),
+                  style: TextStyle(fontSize: 17, color: Color(0xff797979)),
                   textAlign: TextAlign.center,
                 ),
 
