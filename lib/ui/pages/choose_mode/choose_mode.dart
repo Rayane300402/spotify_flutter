@@ -1,12 +1,15 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:spotify_futter/core/configs/theme/palette.dart';
+import 'package:spotify_futter/ui/pages/choose_mode/bloc.dart';
 
 import '../../../core/configs/assets/images.dart';
 import '../../../core/configs/assets/vectors.dart';
 import '../../components/button.dart';
+import '../../components/mode_button.dart';
 
 class ChooseModePage extends StatelessWidget {
   const ChooseModePage({super.key});
@@ -52,67 +55,86 @@ class ChooseModePage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Column(
-                      children: [
-                        ClipOval(
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                            child: Container(
-                              height: 80,
-                              width: 80,
-                              decoration: BoxDecoration(
-                                color: Color(0xff30303c).withValues(alpha: 0.7),
-                              ),
-                              child: SvgPicture.asset(
-                                Vectors.moon,
-                                fit: BoxFit.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 10),
-
-                        const Text(
-                          'Dark Mode',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 17,
-                            color: Palette.grey,
-                          ),
-                        ),
-                      ],
+                    ModeButton(
+                      icon: Vectors.moon,
+                      label: 'Dark Mode',
+                      isSelected: context.watch<ModeCubit>().state == ThemeMode.dark,
+                      onTap: () => context.read<ModeCubit>().switchMode(ThemeMode.dark),
                     ),
-                    SizedBox(width: 35),
-                    Column(
-                      children: [
-                        ClipOval(
-                          child: BackdropFilter(
-                            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                            child: Container(
-                              height: 80,
-                              width: 80,
-                              decoration: BoxDecoration(
-                                color: Color(0xff30303c).withValues(alpha: 0.7),
-                              ),
-                              child: SvgPicture.asset(
-                                Vectors.sun,
-                                fit: BoxFit.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 10),
-
-                        const Text(
-                          'Light Mode',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 17,
-                            color: Palette.grey,
-                          ),
-                        ),
-                      ],
+                    const SizedBox(width: 35),
+                    ModeButton(
+                      icon: Vectors.sun,
+                      label: 'Light Mode',
+                      isSelected: context.watch<ModeCubit>().state == ThemeMode.light,
+                      onTap: () => context.read<ModeCubit>().switchMode(ThemeMode.light),
                     ),
+                    // Column(
+                    //   children: [
+                    //     GestureDetector(
+                    //       onTap: () => context.read<ModeCubit>().switchMode(ThemeMode.dark),
+                    //       child: ClipOval(
+                    //         child: BackdropFilter(
+                    //           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    //           child: Container(
+                    //             height: 80,
+                    //             width: 80,
+                    //             decoration: BoxDecoration(
+                    //               color: Color(0xff30303c).withValues(alpha: 0.7),
+                    //             ),
+                    //             child: SvgPicture.asset(
+                    //               Vectors.moon,
+                    //               fit: BoxFit.none,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     SizedBox(height: 10),
+                    //
+                    //     const Text(
+                    //       'Dark Mode',
+                    //       style: TextStyle(
+                    //         fontWeight: FontWeight.w500,
+                    //         fontSize: 17,
+                    //         color: Palette.grey,
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    // SizedBox(width: 35),
+                    // Column(
+                    //   children: [
+                    //     GestureDetector(
+                    //       onTap: () => context.read<ModeCubit>().switchMode(ThemeMode.light),
+                    //       child: ClipOval(
+                    //         child: BackdropFilter(
+                    //           filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    //           child: Container(
+                    //             height: 80,
+                    //             width: 80,
+                    //             decoration: BoxDecoration(
+                    //               color: Color(0xff30303c).withValues(alpha: 0.7),
+                    //             ),
+                    //             child: SvgPicture.asset(
+                    //               Vectors.sun,
+                    //               fit: BoxFit.none,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //     ),
+                    //     SizedBox(height: 10),
+                    //
+                    //     const Text(
+                    //       'Light Mode',
+                    //       style: TextStyle(
+                    //         fontWeight: FontWeight.w500,
+                    //         fontSize: 17,
+                    //         color: Palette.grey,
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
                 SizedBox(height: 50),
