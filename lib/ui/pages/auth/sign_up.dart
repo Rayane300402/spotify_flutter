@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:spotify_futter/ui/components/input_field.dart';
+import 'package:spotify_futter/ui/pages/auth/sign_in.dart';
 import 'package:spotify_futter/utils/is_dark.dart';
 
 import '../../../core/configs/assets/vectors.dart';
@@ -77,10 +78,10 @@ class _SignUpState extends State<SignUp> {
                                     fontSize: 15, color: Color(0xff797979)),
                                 children: [
                               TextSpan(
-                                text: 'If you need support ',
+                                text: 'If You Need Support ',
                               ),
                               TextSpan(
-                                  text: 'Click here',
+                                  text: 'Click Here',
                                   style: TextStyle(color: Color(0xff38B432)),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () async {
@@ -115,6 +116,29 @@ class _SignUpState extends State<SignUp> {
                           title: 'Create Account',
                           height: 80,
                         ),
+                        SizedBox(height: 50),
+                        RichText(
+                            text: TextSpan(
+                                style: TextStyle(
+                                    fontSize: 15, color: Color(0xffa5a3a3), fontWeight: FontWeight.w600),
+                                children: [
+                                  TextSpan(
+                                    text: 'Already A Member? ',
+                                  ),
+                                  TextSpan(
+                                      text: 'Sign In',
+                                      style: TextStyle(color: Color(0xff288CE9)),
+                                      recognizer: TapGestureRecognizer()
+                                        ..onTap = ()  {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (BuildContext context) =>
+                                                  SignIn(),
+                                            ),
+                                          );
+                                        }),
+                                ])),
                       ],
                     ),
                   ),
