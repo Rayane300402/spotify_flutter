@@ -32,6 +32,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
         icon: Container(
           height: 50,
           width: 50,
+          // padding: EdgeInsets.only(left: 20),
           decoration: BoxDecoration(
               color: context.isDarkMode ? Colors.white.withValues(alpha: 0.03) : Colors.black.withValues(alpha:0.04),
               shape: BoxShape.circle

@@ -1,0 +1,129 @@
+import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:spotify_futter/ui/components/input_field.dart';
+import 'package:spotify_futter/utils/is_dark.dart';
+
+import '../../../core/configs/assets/vectors.dart';
+import '../../../core/configs/theme/palette.dart';
+import '../../../utils/url_launcher.dart';
+import '../../components/back_button.dart';
+import '../../components/button.dart';
+
+class SignUp extends StatefulWidget {
+  const SignUp({super.key});
+
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
+  final TextEditingController _fullName = TextEditingController();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+
+  @override
+  void dispose() {
+    _fullName.dispose();
+    _email.dispose();
+    _password.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final primaryTextColor =
+        context.isDarkMode ? Palette.grey : Palette.surfaceDark;
+
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        FocusScope.of(context).unfocus(); // now safe: won't clear text
+      },
+      child: Scaffold(
+        body: SafeArea(
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: CustomAppBar(
+                  title: SvgPicture.asset(
+                    Vectors.logo,
+                    height: 40,
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.all(40),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Register',
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: primaryTextColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 21),
+                        RichText(
+                            text: TextSpan(
+                                style: TextStyle(
+                                    fontSize: 15, color: Color(0xff797979)),
+                                children: [
+                              TextSpan(
+                                text: 'If you need support ',
+                              ),
+                              TextSpan(
+                                  text: 'Click here',
+                                  style: TextStyle(color: Color(0xff38B432)),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () async {
+                                      const url =
+                                          'https://support.spotify.com/';
+
+                                      try {
+                                        launchURL(url);
+                                      } catch (e) {
+                                        debugPrint('Error launching $url: $e');
+                                      }
+                                    }),
+                            ])),
+                        SizedBox(height: 50),
+                        InputField(
+                            controller: _fullName, hintText: 'Full Name'),
+                        SizedBox(height: 20),
+                        InputField(controller: _email, hintText: 'Email'),
+                        SizedBox(height: 20),
+                        InputField(
+                          controller: _password,
+                          hintText: 'Password',
+                          isPassword: true,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        CustomButton(
+                          onPressed: () {
+                            print(_fullName.text.toString());
+                          },
+                          title: 'Create Account',
+                          height: 80,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

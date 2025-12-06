@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:spotify_futter/core/configs/assets/images.dart';
 import 'package:spotify_futter/ui/components/basic_button.dart';
+import 'package:spotify_futter/ui/pages/auth/sign_in.dart';
+import 'package:spotify_futter/ui/pages/auth/sign_up.dart';
 import 'package:spotify_futter/utils/is_dark.dart';
 
 import '../../../core/configs/assets/vectors.dart';
@@ -68,11 +70,11 @@ class SignupOrSignin extends StatelessWidget {
                         Expanded(
                           child: CustomButton(
                             onPressed: () {
-                              Navigator.pushReplacement(
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (BuildContext context) =>
-                                      SignupOrSignin(),
+                                      SignUp(),
                                 ),
                               );
                             },
@@ -85,7 +87,15 @@ class SignupOrSignin extends StatelessWidget {
                         ),
                         Expanded(
                           flex: 1,
-                          child: BasicButton(onPressed: () {}, title: 'Sign In', height: 73,)
+                          child: BasicButton(onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    SignIn(),
+                              ),
+                            );
+                          }, title: 'Sign In', height: 73,)
 
                         ),
                       ],
