@@ -1,15 +1,19 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:spotify_futter/domain/usecases/auth/signin.dart';
 import 'package:spotify_futter/ui/pages/auth/sign_up.dart';
 import 'package:spotify_futter/utils/is_dark.dart';
 
 import '../../../core/configs/assets/vectors.dart';
 import '../../../core/configs/theme/palette.dart';
+import '../../../data/models/auth/signin.dart';
+import '../../../service_locator.dart';
 import '../../../utils/url_launcher.dart';
 import '../../components/back_button.dart';
 import '../../components/button.dart';
 import '../../components/input_field.dart';
+import '../root/root.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -42,6 +46,7 @@ class _SignInState extends State<SignIn> {
         FocusScope.of(context).unfocus(); // now safe: won't clear text
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: SafeArea(
           child: Stack(
             children: [
@@ -109,7 +114,9 @@ class _SignInState extends State<SignIn> {
                         Align(
                           alignment: Alignment.centerLeft,
                           child: GestureDetector(
-                            onTap: () {},
+                            onTap: () async {
+
+                            },
                             child: Padding(
                               padding: const EdgeInsets.only(left: 20),
                               child: Text(
@@ -126,8 +133,23 @@ class _SignInState extends State<SignIn> {
                           height: 20,
                         ),
                         CustomButton(
-                          onPressed: () {
-                            print(_fullName.text.toString());
+                          onPressed: () async {
+                            var result = await sL<SignInUseCase>().call(
+                                params: SignInModel(
+                                    email: _email.text,
+                                    password: _password.text));
+                            result.fold((l) {
+                              var snackBar = SnackBar(content: Text(l));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            }, (r) {
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          RootPage()),
+                                      (route) => false);
+                            });
                           },
                           title: 'Sign In',
                           height: 80,

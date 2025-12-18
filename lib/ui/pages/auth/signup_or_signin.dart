@@ -19,6 +19,7 @@ class SignupOrSignin extends StatelessWidget {
     final primaryTextColor = context.isDarkMode ? Palette.grey : Palette.surfaceDark;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SafeArea(
         child: Stack(
           children: [

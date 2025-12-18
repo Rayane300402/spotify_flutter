@@ -6,6 +6,7 @@ import 'package:spotify_futter/domain/usecases/auth/register.dart';
 import 'package:spotify_futter/service_locator.dart';
 import 'package:spotify_futter/ui/components/input_field.dart';
 import 'package:spotify_futter/ui/pages/auth/sign_in.dart';
+import 'package:spotify_futter/ui/pages/root/root.dart';
 import 'package:spotify_futter/utils/is_dark.dart';
 
 import '../../../core/configs/assets/vectors.dart';
@@ -45,6 +46,7 @@ class _SignUpState extends State<SignUp> {
         FocusScope.of(context).unfocus(); // now safe: won't clear text
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false, // to avoid resizing when a keyboard pops up
         body: SafeArea(
           child: Stack(
             children: [
@@ -119,7 +121,18 @@ class _SignUpState extends State<SignUp> {
                                     fullName: _fullName.text,
                                     email: _email.text,
                                     password: _password.text));
-                            result.fold((l){}, (r){});
+                            result.fold((l) {
+                              var snackBar = SnackBar(content: Text(l));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                            }, (r) {
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          RootPage()),
+                                  (route) => false);
+                            });
                           },
                           title: 'Register Account',
                           height: 80,

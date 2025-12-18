@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:spotify_futter/data/models/auth/registration.dart';
+import 'package:spotify_futter/data/models/auth/signin.dart';
 import 'package:spotify_futter/data/sources/auth/auth_firebase.dart';
 import 'package:spotify_futter/domain/repo/auth/auth_repo.dart';
 import '../../../service_locator.dart';
@@ -11,8 +12,7 @@ class AuthRepoImp extends AuthRepo {
   }
 
   @override
-  Future<void> signin() {
-    // TODO: implement signin
-    throw UnimplementedError();
+  Future<Either> signin(SignInModel signin) async{
+    return await sL<AuthFirebase>().signin(signin);
   }
 }
