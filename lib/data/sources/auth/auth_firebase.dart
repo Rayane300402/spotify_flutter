@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -13,9 +14,17 @@ class AuthFirebaseService extends AuthFirebase {
   @override
   Future<Either> register(Registration registration) async{
     try {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        var data = await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: registration.email,
             password: registration.password
+        );
+
+        FirebaseFirestore.instance.collection('Users').doc(data.user?.uid)
+            .set(
+          {
+            'name': registration.fullName,
+            'email': data.user?.email
+          }
         );
 
         return Right('Registration success');

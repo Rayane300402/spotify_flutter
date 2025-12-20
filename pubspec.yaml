@@ -39,10 +39,12 @@ dependencies:
   hydrated_bloc: ^10.1.1
   path_provider: ^2.1.5
   url_launcher: ^6.3.2
-  firebase_core: ^4.2.1
+  firebase_core: ^4.3.0
   firebase_auth: ^6.1.2
   get_it: ^9.2.0
   dartz: ^0.10.1
+  cloud_firestore: ^6.1.1
+  firebase_storage: ^13.0.5
 
 dev_dependencies:
   flutter_test:
