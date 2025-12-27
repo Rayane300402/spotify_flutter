@@ -13,7 +13,7 @@ import '../../../utils/url_launcher.dart';
 import '../../components/back_button.dart';
 import '../../components/button.dart';
 import '../../components/input_field.dart';
-import '../root/root.dart';
+import '../root/home.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -147,7 +147,7 @@ class _SignInState extends State<SignIn> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                          RootPage()),
+                                          HomePage()),
                                       (route) => false);
                             });
                           },

@@ -6,7 +6,7 @@ import 'package:spotify_futter/domain/usecases/auth/register.dart';
 import 'package:spotify_futter/service_locator.dart';
 import 'package:spotify_futter/ui/components/input_field.dart';
 import 'package:spotify_futter/ui/pages/auth/sign_in.dart';
-import 'package:spotify_futter/ui/pages/root/root.dart';
+import 'package:spotify_futter/ui/pages/root/home.dart';
 import 'package:spotify_futter/utils/is_dark.dart';
 
 import '../../../core/configs/assets/vectors.dart';
@@ -130,7 +130,7 @@ class _SignUpState extends State<SignUp> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                          RootPage()),
+                                          HomePage()),
                                   (route) => false);
                             });
                           },
