@@ -7,13 +7,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
   final Widget? action;
   final Color? backgroundColor;
   final bool hideBack;
+  final Widget? leading;
 
   const CustomAppBar(
       {super.key,
       this.title,
       this.hideBack = false,
       this.action,
-      this.backgroundColor});
+      this.backgroundColor,
+      this.leading});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget{
       actions: [
         action ?? Container()
       ],
-      leading: hideBack ? null : IconButton(
+      leading: hideBack ? leading : IconButton(
         onPressed: (){
           Navigator.pop(context);
         },
