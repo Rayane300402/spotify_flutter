@@ -20,7 +20,7 @@ class Tabs extends StatelessWidget {
             width: 3,
             color: Palette.primary,
           ),
-          insets: EdgeInsets.symmetric(horizontal: 8), // 👈 magic happens here
+          insets: EdgeInsets.symmetric(horizontal: 8),
         ),
         padding: const EdgeInsets.only(
             top: 30,

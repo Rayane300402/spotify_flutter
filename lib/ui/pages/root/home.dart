@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:spotify_futter/ui/components/home_artist_card.dart';
-import 'package:spotify_futter/ui/components/tabs.dart';
+import 'package:spotify_futter/ui/pages/root/components/home_artist_card.dart';
+import 'package:spotify_futter/ui/pages/root/components/news_section.dart';
+import 'package:spotify_futter/ui/pages/root/components/tabs.dart';
 import 'package:spotify_futter/utils/is_dark.dart';
 
 import '../../../core/configs/assets/vectors.dart';
@@ -15,7 +16,8 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -62,11 +64,18 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                   padding: const EdgeInsets.symmetric(horizontal: 40),
                   child: HomeArtistCard(),
                 ),
-
                 Tabs(
                   tabController: _tabController,
-                )
-
+                ),
+                SizedBox(height: 15,),
+                SizedBox(
+                  height: 250,
+                    child: TabBarView(controller: _tabController, children: [
+                      NewsSection(),
+                      Container(),
+                      Container(),
+                      Container(),
+                ]))
               ],
             ),
           )

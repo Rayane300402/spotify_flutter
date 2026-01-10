@@ -27,8 +27,8 @@ Future<void> connectToFirebaseEmulators() async {
   final host = Platform.isAndroid ? '10.0.2.2' : 'localhost';
 
   FirebaseAuth.instance.useAuthEmulator(host, 9099);
-  FirebaseFirestore.instance.useFirestoreEmulator(host, 8080);
-  FirebaseStorage.instance.useStorageEmulator(host, 9199);
+  FirebaseFirestore.instance.useFirestoreEmulator(Platform.isIOS ? 'localhost ' : '10.0.2.2', 8080);
+  FirebaseStorage.instance.useStorageEmulator(Platform.isIOS ? 'localhost ' : '10.0.2.2', 9199);
 
   // Optional: makes debugging nicer (no cached local persistence surprises)
   // FirebaseFirestore.instance.settings =

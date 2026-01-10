@@ -5,4 +5,6 @@ class Images {
   static const String chooseModeBG = '${basePath}choose_mode_bg.png';
   static const String authBG = '${basePath}auth_bg.png';
   static const String homeArtist = '${basePath}home_artist.png';
+  static const String play = '${basePath}play.png';
+  static const String playDark = '${basePath}play_dark.png';
 }
