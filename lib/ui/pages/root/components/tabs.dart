@@ -30,14 +30,7 @@ class Tabs extends StatelessWidget {
         unselectedLabelColor: context.isDarkMode ? Palette.darkGrey : Color(0xffbebebe) ,
         tabs: [
           Text(
-            'News',
-            style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 20
-            ),
-          ),
-          Text(
-            'Videos',
+            'New',
             style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 20
@@ -51,7 +44,14 @@ class Tabs extends StatelessWidget {
             ),
           ),
           Text(
-            'Canvas',
+            'Podcasts',
+            style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 20
+            ),
+          ),
+          Text(
+            'Audiobooks',
             style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 20

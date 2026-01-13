@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage>
                 ),
                 SizedBox(height: 15,),
                 SizedBox(
-                  height: 250,
+                  height: 260,
                     child: TabBarView(controller: _tabController, children: [
                       NewsSection(),
                       Container(),
