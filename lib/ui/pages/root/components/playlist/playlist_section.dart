@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_futter/ui/pages/root/bloc/playlist_cubit.dart';
 import 'package:spotify_futter/ui/pages/root/bloc/playlist_state.dart';
-import 'package:spotify_futter/ui/pages/root/components/play_list.dart';
-import 'package:spotify_futter/ui/pages/root/components/playlist_header.dart';
+import 'package:spotify_futter/ui/pages/root/components/playlist/play_list.dart';
+import 'package:spotify_futter/ui/pages/root/components/playlist/playlist_header.dart';
 import 'package:spotify_futter/utils/is_dark.dart';
 
-import '../../../../core/configs/theme/palette.dart';
+import '../../../../../core/configs/theme/palette.dart';
 
 class PlaylistSection extends StatelessWidget {
   const PlaylistSection({super.key});

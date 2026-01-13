@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:spotify_futter/ui/components/favorite_btn.dart';
 import 'package:spotify_futter/ui/components/start_btn.dart';
 
-import '../../../../domain/entities/song/song.dart';
+import '../../../../../domain/entities/song/song.dart';
 
 class PlayList extends StatelessWidget {
   final List<SongEntity> songs;
@@ -57,7 +58,8 @@ class PlayList extends StatelessWidget {
                     Text(songs[index].length.toString().replaceAll('.', ":")),
                     const SizedBox(
                       width: 20,
-                    )
+                    ),
+                    FavoriteBtn()
                   ],
                 )
               ],

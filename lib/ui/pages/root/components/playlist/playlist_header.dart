@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_futter/utils/is_dark.dart';
 
-import '../../../../core/configs/theme/palette.dart';
+import '../../../../../core/configs/theme/palette.dart';
 
 class PlaylistHeader extends StatelessWidget {
   final bool isEmpty;
@@ -15,7 +15,7 @@ class PlaylistHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'PlayList',
+            'Playlist',
             style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 20,

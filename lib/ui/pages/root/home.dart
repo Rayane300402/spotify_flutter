@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:spotify_futter/ui/pages/root/components/home_artist_card.dart';
 import 'package:spotify_futter/ui/pages/root/components/news_section.dart';
-import 'package:spotify_futter/ui/pages/root/components/playlist_section.dart';
+import 'package:spotify_futter/ui/pages/root/components/playlist/playlist_section.dart';
 import 'package:spotify_futter/ui/pages/root/components/tabs.dart';
 import 'package:spotify_futter/utils/is_dark.dart';
 
