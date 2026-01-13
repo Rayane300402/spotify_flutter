@@ -9,4 +9,11 @@ class SongRepoImp extends SongsRepo{
     return await sL<SongService>().getSongs();
   }
 
+  @override
+  Future<Either> getPlaylist() async {
+    return await sL<SongService>().getPlaylist();
+  }
+
+
+
 }

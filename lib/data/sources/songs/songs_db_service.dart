@@ -5,6 +5,7 @@ import 'package:spotify_futter/domain/entities/song/song.dart';
 
 abstract class SongService {
   Future<Either> getSongs();
+  Future<Either> getPlaylist();
 }
 
 class SongServiceImp extends SongService {
@@ -30,6 +31,29 @@ class SongServiceImp extends SongService {
       return Left('An error occurred while fetching the songs. Please try again.');
     }
     
+  }
+
+  @override
+  Future<Either> getPlaylist() async{
+
+    try {
+      List<SongEntity> songs = [];
+      var data = await FirebaseFirestore.instance.collection("songs").orderBy('date', descending: true).get();
+
+      for (var e in data.docs) {
+        var songModel = SongModel.fromJson(e.data());
+        //e.data()  returns data of doc, and is in json format, that's where we use the song model
+
+        // convert to entity
+        songs.add(songModel.toEntity());
+      }
+
+      return Right(songs);
+
+    } catch (e) {
+      return Left('An error occurred while fetching the songs. Please try again.');
+    }
+
   }
 
 }

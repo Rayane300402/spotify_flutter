@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:spotify_futter/ui/pages/root/components/home_artist_card.dart';
 import 'package:spotify_futter/ui/pages/root/components/news_section.dart';
+import 'package:spotify_futter/ui/pages/root/components/playlist_section.dart';
 import 'package:spotify_futter/ui/pages/root/components/tabs.dart';
 import 'package:spotify_futter/utils/is_dark.dart';
 
@@ -56,27 +57,37 @@ class _HomePageState extends State<HomePage>
                   )),
             ),
           ),
-          SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                  child: HomeArtistCard(),
-                ),
-                Tabs(
-                  tabController: _tabController,
-                ),
-                SizedBox(height: 15,),
-                SizedBox(
-                  height: 260,
-                    child: TabBarView(controller: _tabController, children: [
-                      NewsSection(),
-                      Container(),
-                      Container(),
-                      Container(),
-                ]))
-              ],
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    child: HomeArtistCard(),
+                  ),
+                  Tabs(
+                    tabController: _tabController,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  SizedBox(
+                      height: 260,
+                      child: TabBarView(controller: _tabController, children: [
+                        NewsSection(),
+                        Container(),
+                        Container(),
+                        Container(),
+                      ])),
+                  SizedBox(
+                    height: 20,
+                  ),
+
+                  PlaylistSection()
+
+                ],
+              ),
             ),
           )
         ],

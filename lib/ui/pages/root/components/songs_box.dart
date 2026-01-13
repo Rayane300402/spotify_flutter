@@ -1,8 +1,8 @@
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:spotify_futter/core/configs/assets/images.dart';
 import 'package:spotify_futter/core/configs/theme/palette.dart';
 import 'package:spotify_futter/domain/entities/song/song.dart';
+import 'package:spotify_futter/ui/components/start_btn.dart';
 import 'package:spotify_futter/utils/cover_url.dart';
 import 'package:spotify_futter/utils/is_dark.dart';
 
@@ -39,19 +39,7 @@ class SongsBox extends StatelessWidget {
                         ),
                         child: Align(
                           alignment: Alignment.bottomRight,
-                          child: GestureDetector(
-                            onTap: (){},
-                            child: Container(
-                              height: 40,
-                              width: 40,
-                              transform: Matrix4.translationValues(10, 10, 0),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: context.isDarkMode ? Palette.darkGrey : Color(0xFF555555)
-                              ),
-                              child:context.isDarkMode ? Image.asset(Images.play) :Image.asset(Images.playDark),
-                            ),
-                          ),
+                          child:StartBtn(onTap: (){}, height: 40, width: 40, isNews: true,)
                         ),
                       );
                     },
