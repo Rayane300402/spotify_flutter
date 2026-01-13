@@ -34,7 +34,7 @@ class SongsBox extends StatelessWidget {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
                           image: DecorationImage(
-                              image: NetworkImage(hasUrl ? snapshot.data! : "https://placehold.co/300x300"),
+                              image: NetworkImage(hasUrl ? snapshot.data! : "https://placehold.co/300x300.png"),
                           fit: BoxFit.cover)
                         ),
                         child: Align(
