@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_futter/ui/components/favorite_btn.dart';
 import 'package:spotify_futter/ui/components/start_btn.dart';
+import 'package:spotify_futter/ui/pages/song_player/song_player.dart';
 
 import '../../../../../domain/entities/song/song.dart';
 
@@ -15,7 +16,10 @@ class PlayList extends StatelessWidget {
         physics: NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+              MaterialPageRoute(builder: (context) => SongPlayer(song: songs[index]),));
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:spotify_futter/core/configs/assets/images.dart';
-import 'package:spotify_futter/core/configs/theme/palette.dart';
 import 'package:spotify_futter/domain/entities/song/song.dart';
 import 'package:spotify_futter/ui/components/start_btn.dart';
 import 'package:spotify_futter/utils/cover_url.dart';
-import 'package:spotify_futter/utils/is_dark.dart';
 
+import '../../song_player/song_player.dart';
 
 class SongsBox extends StatelessWidget {
   final List<SongEntity> songs;
@@ -19,7 +17,10 @@ class SongsBox extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => SongPlayer(song: songs[index],),));
+            },
             child: SizedBox(
               width: 200,
               child: Column(

@@ -20,7 +20,7 @@ class PlaylistSection extends StatelessWidget {
           if (state is PlaylistLoading) {
             return Column(
               children: [
-                PlaylistHeader(isEmpty: false),
+                PlaylistHeader(isEmpty: true),
                 Container(
                   alignment: Alignment.center,
                   child: CircularProgressIndicator(),
@@ -48,7 +48,7 @@ class PlaylistSection extends StatelessWidget {
 
           return Column(
             children: [
-              PlaylistHeader(isEmpty: false),
+              PlaylistHeader(isEmpty: true),
               Center(
                 child: Text(
                   'No Songs Yet',
