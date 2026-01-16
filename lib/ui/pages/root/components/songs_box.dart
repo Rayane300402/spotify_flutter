@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:spotify_futter/domain/entities/song/song.dart';
 import 'package:spotify_futter/ui/components/start_btn.dart';
-import 'package:spotify_futter/utils/cover_url.dart';
+import 'package:spotify_futter/utils/cover_song_url.dart';
 
 import '../../song_player/song_player.dart';
 

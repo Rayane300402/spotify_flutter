@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spotify_futter/ui/components/favorite_btn.dart';
 import 'package:spotify_futter/ui/components/start_btn.dart';
 import 'package:spotify_futter/ui/pages/song_player/song_player.dart';
+import 'package:spotify_futter/utils/common.dart';
 
 import '../../../../../domain/entities/song/song.dart';
 
@@ -15,6 +16,7 @@ class PlayList extends StatelessWidget {
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
+          String songLength = formatSongLength(songs[index].length);
           return GestureDetector(
             onTap: () {
               Navigator.push(context,
@@ -59,7 +61,7 @@ class PlayList extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Text(songs[index].length.toString().replaceAll('.', ":")),
+                    Text(songLength),
                     const SizedBox(
                       width: 20,
                     ),
