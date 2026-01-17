@@ -48,7 +48,10 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   await connectToFirebaseEmulators(); // run firebase emulators:start --import=./emulator_data --export-on-exit  to work and restore old data
+
+  print("Bucket from app options: ${Firebase.app().options.storageBucket}");
   await initDep();
   runApp(const MyApp());
 }

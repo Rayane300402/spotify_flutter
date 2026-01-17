@@ -45,6 +45,7 @@ dependencies:
   dartz: ^0.10.1
   cloud_firestore: ^6.1.1
   firebase_storage: ^13.0.5
+  just_audio: ^0.10.5
 
 dev_dependencies:
   flutter_test:

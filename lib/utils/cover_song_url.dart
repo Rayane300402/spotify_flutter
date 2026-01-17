@@ -8,7 +8,7 @@ print('covers/${song.artist} - ${song.title}.jpg');
 }
 
 Future<String> getSongUrl (SongEntity song) async {
-  final ref = FirebaseStorage.instance.ref().child('covers/${song.artist} - ${song.title}.mp3');
-  print('covers/${song.artist} - ${song.title}.mp3');
+  final ref = FirebaseStorage.instance.ref().child('songs/${song.artist} - ${song.title}.mp3');
+  print('songs/${song.artist} - ${song.title}.mp3');
   return await ref.getDownloadURL();
 }
