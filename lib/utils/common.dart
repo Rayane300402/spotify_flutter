@@ -5,5 +5,10 @@ String formatDuration(Duration duration) {
 }
 
 String formatSongLength(num length) {
-  return length.toString().replaceAll('.', ":");
+  final format = length.toString().replaceAll('.', ":");
+  if(format.split('').length == 3){
+    return '${format}0';
+  } else {
+    return format;
+  }
 }
