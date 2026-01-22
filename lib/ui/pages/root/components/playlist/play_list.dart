@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_futter/ui/components/favorite_btn.dart';
 import 'package:spotify_futter/ui/components/start_btn.dart';
 import 'package:spotify_futter/ui/pages/song_player/song_player.dart';
 import 'package:spotify_futter/utils/common.dart';
 
 import '../../../../../domain/entities/song/song.dart';
+import '../../../../components/bloc/favorite_cubit.dart';
 
 class PlayList extends StatelessWidget {
   final List<SongEntity> songs;
@@ -19,8 +21,14 @@ class PlayList extends StatelessWidget {
           String songLength = formatSongLength(songs[index].length);
           return GestureDetector(
             onTap: () {
-              Navigator.push(context,
-              MaterialPageRoute(builder: (context) => SongPlayer(song: songs[index]),));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => BlocProvider.value(
+                      value: context.read<FavoritesCubit>(),
+                      child: SongPlayer(song: songs[index]),
+                    ),
+                  ));
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

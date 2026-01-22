@@ -10,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:spotify_futter/core/configs/theme/theme.dart';
 import 'package:spotify_futter/service_locator.dart';
+import 'package:spotify_futter/ui/components/bloc/favorite_cubit.dart';
 import 'package:spotify_futter/ui/pages/choose_mode/bloc.dart';
 import 'package:spotify_futter/ui/pages/splash/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -63,7 +64,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => ModeCubit())],
+      providers: [
+        BlocProvider(create: (_) => ModeCubit()),
+      ],
       child: BlocBuilder<ModeCubit, ThemeMode>(
         builder:
             (context, mode) => MaterialApp(

@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:spotify_futter/ui/components/bloc/favorite_cubit.dart';
 import 'package:spotify_futter/ui/pages/root/components/home_artist_card.dart';
 import 'package:spotify_futter/ui/pages/root/components/news_section.dart';
 import 'package:spotify_futter/ui/pages/root/components/playlist/playlist_section.dart';
@@ -29,69 +32,78 @@ class _HomePageState extends State<HomePage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-          child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: CustomAppBar(
-              hideBack: true,
-              leading: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.search,
-                    size: 35,
-                    color: context.isDarkMode ? Palette.grey : Colors.black,
-                  )),
-              title: SvgPicture.asset(
-                Vectors.logo,
-                height: 40,
-              ),
-              action: IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.more_vert,
-                    size: 35,
-                    color: context.isDarkMode ? Palette.grey : Colors.black,
-                  )),
-            ),
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40),
-                    child: HomeArtistCard(),
-                  ),
-                  Tabs(
-                    tabController: _tabController,
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  SizedBox(
-                      height: 260,
-                      child: TabBarView(controller: _tabController, children: [
-                        NewsSection(),
-                        Container(),
-                        Container(),
-                        Container(),
-                      ])),
-                  SizedBox(
-                    height: 20,
-                  ),
+    final user = FirebaseAuth.instance.currentUser;
 
-                  PlaylistSection()
+    if (user == null) {
+      return const SizedBox.shrink();
+    }
 
-                ],
-              ),
-            ),
-          )
-        ],
-      )),
+    return BlocProvider(
+        create: (_) => FavoritesCubit()..startListening(user.uid),
+      child: Scaffold(
+        body: SafeArea(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: CustomAppBar(
+                    hideBack: true,
+                    leading: IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.search,
+                          size: 35,
+                          color: context.isDarkMode ? Palette.grey : Colors.black,
+                        )),
+                    title: SvgPicture.asset(
+                      Vectors.logo,
+                      height: 40,
+                    ),
+                    action: IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.more_vert,
+                          size: 35,
+                          color: context.isDarkMode ? Palette.grey : Colors.black,
+                        )),
+                  ),
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 40),
+                          child: HomeArtistCard(),
+                        ),
+                        Tabs(
+                          tabController: _tabController,
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        SizedBox(
+                            height: 260,
+                            child: TabBarView(controller: _tabController, children: [
+                              NewsSection(),
+                              Container(),
+                              Container(),
+                              Container(),
+                            ])),
+                        SizedBox(
+                          height: 20,
+                        ),
+
+                        PlaylistSection()
+
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            )),
+      ),
     );
   }
 }
