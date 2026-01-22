@@ -91,7 +91,7 @@ class SongPlayer extends StatelessWidget {
                         ),
                       ],
                     ),
-                    FavoriteBtn()
+                    FavoriteBtn(songEntity: song,)
                   ],
                 ),
 

@@ -65,7 +65,7 @@ class PlayList extends StatelessWidget {
                     const SizedBox(
                       width: 20,
                     ),
-                    FavoriteBtn()
+                    FavoriteBtn(songEntity: songs[index])
                   ],
                 )
               ],
