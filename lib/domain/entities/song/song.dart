@@ -5,7 +5,9 @@ class SongEntity {
   final String artist;
   final num length;
   final Timestamp date;
+  final bool isFav;
+  final String songId;
 
-  SongEntity({required this.title, required this.artist, required this.length, required this.date});
+  SongEntity({required this.title, required this.artist, required this.length, required this.date, required this.isFav, required this.songId});
 
 }

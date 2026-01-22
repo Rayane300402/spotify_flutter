@@ -14,6 +14,14 @@ class SongRepoImp extends SongsRepo{
     return await sL<SongService>().getPlaylist();
   }
 
+  @override
+  Future<Either> addOrRemoveFav(String songId) async {
+    return await sL<SongService>().addOrRemoveFav(songId);
+  }
 
+  @override
+  Future<bool> isFav(String songId) async{
+    return await sL<SongService>().isFav(songId);
+  }
 
 }

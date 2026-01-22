@@ -9,6 +9,9 @@ import 'package:spotify_futter/domain/usecases/auth/register.dart';
 import 'package:spotify_futter/domain/usecases/auth/signin.dart';
 import 'package:spotify_futter/domain/usecases/songs/get_playlist.dart';
 import 'package:spotify_futter/domain/usecases/songs/get_songs.dart';
+import 'package:spotify_futter/domain/usecases/songs/is_fav.dart';
+
+import 'domain/usecases/songs/add_or_remove_fav.dart' show AddOrRemoveFavUseCase;
 
 
 
@@ -46,6 +49,14 @@ Future<void> initDep() async{
 
   sL.registerSingleton<GetPlaylistUseCase>(
       GetPlaylistUseCase()
+  );
+
+  sL.registerSingleton<AddOrRemoveFavUseCase>(
+    AddOrRemoveFavUseCase()
+  );
+
+  sL.registerSingleton<IsFavUseCase>(
+    IsFavUseCase()
   );
 
 }
