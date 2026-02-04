@@ -1,13 +1,16 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/foundation.dart';
 import 'package:spotify_futter/data/models/auth/registration.dart';
 import 'package:spotify_futter/data/models/auth/signin.dart';
+import 'package:spotify_futter/data/models/auth/user.dart';
+import '../../../domain/entities/auth/user.dart';
 
 abstract class AuthFirebase{
   Future<Either> register(Registration registration);
   Future<Either> signin(SignInModel signin);
+  Future<Either> getUser();
 }
 
 class AuthFirebaseService extends AuthFirebase {
@@ -68,6 +71,30 @@ class AuthFirebaseService extends AuthFirebase {
 
       return Left(message);
     }
+  }
+
+  @override
+  Future<Either<dynamic, dynamic>> getUser() async{
+
+    try {
+      FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+      FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+
+      var user = await firebaseFirestore.collection('Users').doc(
+          firebaseAuth.currentUser?.uid
+      ).get();
+
+      UserData userData = UserData.fromJson(user.data()!);
+
+      userData.profileImg = firebaseAuth.currentUser?.photoURL ?? 'https://cdn-icons-png.flaticon.com/512/10542/10542486.png';
+
+      User userEntity = userData.toEntity();
+
+      return Right(userEntity);
+    } catch (e) {
+      return Left('error in fetching user');
+    }
+
   }
 
 }

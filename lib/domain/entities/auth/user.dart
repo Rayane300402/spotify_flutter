@@ -1,8 +1,7 @@
 class User {
-  String? userId;
-  String? fullName;
-  String? email;
+  String ? fullName;
+  String ? email;
+  String ? profileImg;
 
-
-  User({this.userId, this.fullName, this.email});
+  User({ this.fullName, this.email, this.profileImg});
 }

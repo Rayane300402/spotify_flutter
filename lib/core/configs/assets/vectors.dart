@@ -8,4 +8,5 @@ class Vectors {
   static const String topPattern = '${basePath}top_pattern$format';
   static const String bottomPattern = '${basePath}bottom_pattern$format';
   static const String homeTopCard = '${basePath}home_top_card$format';
+  static const String profileSlide = '${basePath}profile_slide$format';
 }

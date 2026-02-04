@@ -15,4 +15,9 @@ class AuthRepoImp extends AuthRepo {
   Future<Either> signin(SignInModel signin) async{
     return await sL<AuthFirebase>().signin(signin);
   }
+
+  @override
+  Future<Either> getUser() async{
+    return await sL<AuthFirebase>().getUser();
+  }
 }

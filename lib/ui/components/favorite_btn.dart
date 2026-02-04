@@ -24,53 +24,5 @@ class FavoriteBtn extends StatelessWidget {
           );
         },
     );
-
-    //   BlocProvider(
-    //     create: (context) => FavoriteBtnCubit(),
-    //   child: BlocBuilder<FavoriteBtnCubit, FavoriteButtonState>(
-    //       builder: (context, state) {
-    //         if(state is FavoriteButtonInitial) {
-    //           return IconButton(
-    //               onPressed: () async {
-    //                 await context.read<FavoriteBtnCubit>().favoriteButtonUpdated(
-    //                     songEntity.songId
-    //                 );
-    //                 // if (function != null) {
-    //                 //   function!();
-    //                 // }
-    //               },
-    //               icon: Icon(
-    //                 songEntity.isFav ? Icons.favorite : Icons.favorite_outline_outlined,
-    //                 size: 25,
-    //                 color: Palette.darkGrey,
-    //               )
-    //           );
-    //         }
-    //
-    //         if(state is FavoriteButtonUpdated) {
-    //           return IconButton(
-    //               onPressed: () {
-    //                 context.read<FavoriteBtnCubit>().favoriteButtonUpdated(
-    //                     songEntity.songId
-    //                 );
-    //               },
-    //               icon: Icon(
-    //                 state.isFavorite ? Icons.favorite : Icons.favorite_outline_outlined,
-    //                 size: 25,
-    //                 color: Palette.darkGrey,
-    //               )
-    //           );
-    //         }
-    //
-    //         if(state is FavoriteButtonFailed) {
-    //           print('An error occurred');
-    //           return Container();
-    //         }
-    //
-    //         return Container();
-    //
-    //       },
-    //   ),
-    // );
   }
 }

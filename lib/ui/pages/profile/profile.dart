@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+
+import '../../../core/configs/assets/vectors.dart';
+import '../../../utils/is_dark.dart';
+import '../../components/back_button.dart';
+
+class Profile extends StatelessWidget {
+  const Profile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+          child: Column(
+            children: [
+              CustomAppBar(
+                title: Text('Profile'),
+                backgroundColor: context.isDarkMode ? Color(0xff2C2B2B) : Color(0xffFAFAFA),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height / 3,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: context.isDarkMode ? Color(0xff2C2B2B) : Color(0xffFAFAFA),
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(50),
+                    bottomLeft: Radius.circular(50)
+                  )
+                ),
+                child: Stack(
+        clipBehavior: Clip.none,
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: SvgPicture.asset(
+                          Vectors.profileSlide,
+                        width: 50,
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Column(
+                        children: [
+                          Text('user'),
+                          Text('user'),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ],
+          )
+      ),
+    );
+  }
+}

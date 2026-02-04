@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:spotify_futter/ui/components/bloc/favorite_cubit.dart';
+import 'package:spotify_futter/ui/pages/profile/profile.dart';
 import 'package:spotify_futter/ui/pages/root/components/home_artist_card.dart';
 import 'package:spotify_futter/ui/pages/root/components/news_section.dart';
 import 'package:spotify_futter/ui/pages/root/components/playlist/playlist_section.dart';
@@ -49,9 +50,11 @@ class _HomePageState extends State<HomePage>
                   child: CustomAppBar(
                     hideBack: true,
                     leading: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> Profile()));
+                        },
                         icon: Icon(
-                          Icons.search,
+                          Icons.person,
                           size: 35,
                           color: context.isDarkMode ? Palette.grey : Colors.black,
                         )),
