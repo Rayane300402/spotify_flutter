@@ -15,6 +15,7 @@ import 'package:spotify_futter/domain/usecases/songs/is_fav.dart';
 import 'domain/usecases/auth/updateProfileImg.dart';
 import 'domain/usecases/songs/add_or_remove_fav.dart'
     show AddOrRemoveFavUseCase;
+import 'domain/usecases/songs/get_favorite_use_case.dart';
 
 final sL = GetIt.instance;
 
@@ -38,6 +39,8 @@ Future<void> initDep() async {
   sL.registerSingleton<AddOrRemoveFavUseCase>(AddOrRemoveFavUseCase());
 
   sL.registerSingleton<IsFavUseCase>(IsFavUseCase());
+
+  sL.registerSingleton<GetFavoriteSongsUseCase>(GetFavoriteSongsUseCase());
 
   sL.registerSingleton<GetUserUseCase>(GetUserUseCase());
 

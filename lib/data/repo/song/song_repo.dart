@@ -24,4 +24,9 @@ class SongRepoImp extends SongsRepo{
     return await sL<SongService>().isFav(songId);
   }
 
+  @override
+  Future<Either> getUserFavoriteSongs() async{
+    return await sL<SongService>().getUserFavoriteSongs();
+  }
+
 }

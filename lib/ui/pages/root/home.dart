@@ -41,72 +41,84 @@ class _HomePageState extends State<HomePage>
 
     return BlocProvider(
         create: (_) => FavoritesCubit()..startListening(user.uid),
-      child: Scaffold(
-        body: SafeArea(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: CustomAppBar(
-                    hideBack: true,
-                    leading: IconButton(
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> Profile()));
-                        },
-                        icon: Icon(
-                          Icons.person,
-                          size: 35,
-                          color: context.isDarkMode ? Palette.grey : Colors.black,
-                        )),
-                    title: SvgPicture.asset(
-                      Vectors.logo,
-                      height: 40,
-                    ),
-                    action: IconButton(
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.more_vert,
-                          size: 35,
-                          color: context.isDarkMode ? Palette.grey : Colors.black,
-                        )),
-                  ),
-                ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 40),
-                          child: HomeArtistCard(),
-                        ),
-                        Tabs(
-                          tabController: _tabController,
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        SizedBox(
-                            height: 260,
-                            child: TabBarView(controller: _tabController, children: [
-                              NewsSection(),
-                              Container(),
-                              Container(),
-                              Container(),
-                            ])),
-                        SizedBox(
-                          height: 20,
-                        ),
+      child: Builder(builder: (context) {
+        return Scaffold(
+          body: SafeArea(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: CustomAppBar(
+                      hideBack: true,
+                      leading: IconButton(
+                          onPressed: () {
+                            final favCubit = context.read<FavoritesCubit>();
 
-                        PlaylistSection()
-
-                      ],
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => BlocProvider.value(
+                                  value: favCubit,
+                                  child: const Profile(),
+                                ),
+                              ),
+                            );
+                          },
+                          icon: Icon(
+                            Icons.person,
+                            size: 35,
+                            color: context.isDarkMode ? Palette.grey : Colors.black,
+                          )),
+                      title: SvgPicture.asset(
+                        Vectors.logo,
+                        height: 40,
+                      ),
+                      action: IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.more_vert,
+                            size: 35,
+                            color: context.isDarkMode ? Palette.grey : Colors.black,
+                          )),
                     ),
                   ),
-                )
-              ],
-            )),
-      ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 40),
+                            child: HomeArtistCard(),
+                          ),
+                          Tabs(
+                            tabController: _tabController,
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          SizedBox(
+                              height: 260,
+                              child: TabBarView(controller: _tabController, children: [
+                                NewsSection(),
+                                Container(),
+                                Container(),
+                                Container(),
+                              ])),
+                          SizedBox(
+                            height: 20,
+                          ),
+
+                          PlaylistSection()
+
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              )),
+        );
+      }),
     );
   }
 }

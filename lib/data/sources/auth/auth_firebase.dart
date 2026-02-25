@@ -120,7 +120,6 @@ class AuthFirebaseService extends AuthFirebase {
 
       if(uid == null) return Left('Not signed in');
 
-      final ext = file.path.split('.').last;
       final ref = storage.ref().child('profile_images/$uid');
 
       await ref.putFile(file);

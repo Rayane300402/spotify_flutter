@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:spotify_futter/ui/pages/profile/components/profileInfo.dart';
+import 'package:spotify_futter/ui/pages/profile/components/favorite_song.dart';
+import 'package:spotify_futter/ui/pages/profile/components/profile_info.dart';
 
-import '../../../core/configs/assets/vectors.dart';
 import '../../../utils/is_dark.dart';
 import '../../components/back_button.dart';
 
@@ -34,7 +33,7 @@ class Profile extends StatelessWidget {
 
           const SizedBox(height: 30),
 
-
+          FavoriteSong()
         ],
       )),
     );
