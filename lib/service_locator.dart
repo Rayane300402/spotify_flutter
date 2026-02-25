@@ -12,56 +12,34 @@ import 'package:spotify_futter/domain/usecases/songs/get_playlist.dart';
 import 'package:spotify_futter/domain/usecases/songs/get_songs.dart';
 import 'package:spotify_futter/domain/usecases/songs/is_fav.dart';
 
-import 'domain/usecases/songs/add_or_remove_fav.dart' show AddOrRemoveFavUseCase;
-
-
+import 'domain/usecases/auth/updateProfileImg.dart';
+import 'domain/usecases/songs/add_or_remove_fav.dart'
+    show AddOrRemoveFavUseCase;
 
 final sL = GetIt.instance;
 
-Future<void> initDep() async{
+Future<void> initDep() async {
+  sL.registerSingleton<AuthFirebase>(AuthFirebaseService());
 
-  sL.registerSingleton<AuthFirebase>(
-    AuthFirebaseService()
-  );
+  sL.registerSingleton<SongService>(SongServiceImp());
 
-  sL.registerSingleton<SongService>(
-      SongServiceImp()
-  );
+  sL.registerSingleton<AuthRepo>(AuthRepoImp());
 
-  sL.registerSingleton<AuthRepo>(
-      AuthRepoImp()
-  );
+  sL.registerSingleton<SongsRepo>(SongRepoImp());
 
-  sL.registerSingleton<SongsRepo>(
-      SongRepoImp()
-  );
+  sL.registerSingleton<RegisterUseCase>(RegisterUseCase());
 
-  sL.registerSingleton<RegisterUseCase>(
-      RegisterUseCase()
-  );
+  sL.registerSingleton<SignInUseCase>(SignInUseCase());
 
-  sL.registerSingleton<SignInUseCase>(
-    SignInUseCase()
-  );
+  sL.registerSingleton<GetSongsUseCase>(GetSongsUseCase());
 
-  sL.registerSingleton<GetSongsUseCase>(
-      GetSongsUseCase()
-  );
+  sL.registerSingleton<GetPlaylistUseCase>(GetPlaylistUseCase());
 
-  sL.registerSingleton<GetPlaylistUseCase>(
-      GetPlaylistUseCase()
-  );
+  sL.registerSingleton<AddOrRemoveFavUseCase>(AddOrRemoveFavUseCase());
 
-  sL.registerSingleton<AddOrRemoveFavUseCase>(
-    AddOrRemoveFavUseCase()
-  );
+  sL.registerSingleton<IsFavUseCase>(IsFavUseCase());
 
-  sL.registerSingleton<IsFavUseCase>(
-    IsFavUseCase()
-  );
+  sL.registerSingleton<GetUserUseCase>(GetUserUseCase());
 
-  sL.registerSingleton<GetUserUseCase>(
-      GetUserUseCase()
-  );
-
+  sL.registerSingleton<UpdateProfileImageUseCase>(UpdateProfileImageUseCase());
 }

@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:spotify_futter/data/models/auth/registration.dart';
 import 'package:spotify_futter/data/models/auth/signin.dart';
@@ -11,6 +14,7 @@ abstract class AuthFirebase{
   Future<Either> register(Registration registration);
   Future<Either> signin(SignInModel signin);
   Future<Either> getUser();
+  Future<Either> updateProfileImage(File file);
 }
 
 class AuthFirebaseService extends AuthFirebase {
@@ -74,8 +78,7 @@ class AuthFirebaseService extends AuthFirebase {
   }
 
   @override
-  Future<Either<dynamic, dynamic>> getUser() async{
-
+  Future<Either> getUser() async{
     try {
       FirebaseAuth firebaseAuth = FirebaseAuth.instance;
       FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
@@ -84,11 +87,18 @@ class AuthFirebaseService extends AuthFirebase {
           firebaseAuth.currentUser?.uid
       ).get();
 
-      UserData userData = UserData.fromJson(user.data() !);
-print('image ${firebaseAuth.currentUser?.photoURL}');
-      userData.profileImg = firebaseAuth.currentUser?.photoURL ?? 'https://cdn-icons-png.flaticon.com/512/10542/10542486.png';
 
-      print('userData : ${userData.profileImg}');
+      final data = user.data()!;
+      UserData userData = UserData.fromJson(data);
+
+      final authUrl = firebaseAuth.currentUser?.photoURL;
+      final fsUrl = data['profileImg'] as String?;
+
+      userData.profileImg = (fsUrl != null && fsUrl.trim().isNotEmpty)
+          ? fsUrl
+          : (authUrl != null && authUrl.trim().isNotEmpty)
+          ? authUrl
+          : 'https://cdn-icons-png.flaticon.com/512/10542/10542486.png';
 
       User userEntity = userData.toEntity();
 
@@ -97,6 +107,38 @@ print('image ${firebaseAuth.currentUser?.photoURL}');
       return Left('error in fetching user');
     }
 
+  }
+
+  @override
+  Future<Either> updateProfileImage(File file) async{
+    try {
+      final auth = FirebaseAuth.instance;
+      final firestore = FirebaseFirestore.instance;
+      final storage = FirebaseStorage.instance;
+
+      final uid = auth.currentUser?.uid;
+
+      if(uid == null) return Left('Not signed in');
+
+      final ext = file.path.split('.').last;
+      final ref = storage.ref().child('profile_images/$uid');
+
+      await ref.putFile(file);
+
+      final url = await ref.getDownloadURL();
+
+      await auth.currentUser!.updatePhotoURL(url);
+
+      await firestore.collection('Users').doc(uid).set(
+        {'profileImg': url },
+        SetOptions(merge:true)
+      );
+
+      return Right(url);
+
+    } catch (e) {
+        return Left('An error occurred while updating image ${e.toString()}');
+    }
   }
 
 }

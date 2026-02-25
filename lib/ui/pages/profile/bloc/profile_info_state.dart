@@ -10,4 +10,10 @@ class ProfileInfoLoaded extends ProfileInfoState {
   ProfileInfoLoaded({required this.userEntity});
 }
 
+class ProfileInfoUpdatingImage extends ProfileInfoState {}
+class ProfileInfoUpdateImageFailure extends ProfileInfoState {
+  final String message;
+  ProfileInfoUpdateImageFailure(this.message);
+}
+
 class ProfileInfoFailure extends ProfileInfoState {}

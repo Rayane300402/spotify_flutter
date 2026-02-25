@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dartz/dartz.dart';
 import 'package:spotify_futter/data/models/auth/registration.dart';
 import 'package:spotify_futter/data/models/auth/signin.dart';
@@ -19,5 +21,10 @@ class AuthRepoImp extends AuthRepo {
   @override
   Future<Either> getUser() async{
     return await sL<AuthFirebase>().getUser();
+  }
+
+  @override
+  Future<Either> updateProfileImage(File file) async {
+    return await sL<AuthFirebase>().updateProfileImage(file);
   }
 }
