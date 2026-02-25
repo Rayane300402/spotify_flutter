@@ -8,7 +8,8 @@ service firebase.storage {
     }
 
     match /{allPaths=**} {
-      allow read, write: if false;
+      allow read: if true;
+      allow write: if false;
     }
   }
 }

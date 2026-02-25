@@ -21,14 +21,14 @@ class PlaylistHeader extends StatelessWidget {
                 fontSize: 20,
                 color: context.isDarkMode ? Palette.textDark : Colors.black),
           ),
-          if (!isEmpty)
-            Text(
-              'See More',
-              style: TextStyle(
-                  fontSize: 13,
-                  color:
-                      context.isDarkMode ? Color(0xffC6C6C6) : Color(0xff131313)),
-            )
+          // if (!isEmpty)
+          //   Text(
+          //     'See More',
+          //     style: TextStyle(
+          //         fontSize: 13,
+          //         color:
+          //             context.isDarkMode ? Color(0xffC6C6C6) : Color(0xff131313)),
+          //   )
         ],
       ),
     );

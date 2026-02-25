@@ -20,7 +20,7 @@ class SongServiceImp extends SongService {
     try {
       List<SongEntity> songs = [];
       var data = await FirebaseFirestore.instance
-          .collection("songs")
+          .collection("Songs")
           .orderBy('date', descending: true)
           .limit(3)
           .get();
@@ -49,7 +49,7 @@ class SongServiceImp extends SongService {
     try {
       List<SongEntity> songs = [];
       var data = await FirebaseFirestore.instance
-          .collection("songs")
+          .collection("Songs")
           .orderBy('date', descending: true)
           .get();
 
