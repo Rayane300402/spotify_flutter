@@ -21,7 +21,7 @@ class Profile extends StatelessWidget {
                 context.isDarkMode ? Color(0xff2C2B2B) : Color(0xffFAFAFA),
           ),
           Container(
-            height: MediaQuery.of(context).size.height / 3,
+            height: MediaQuery.of(context).size.height / 3.5,
             width: double.infinity,
             decoration: BoxDecoration(
                 color:
@@ -30,7 +30,11 @@ class Profile extends StatelessWidget {
                     bottomRight: Radius.circular(50),
                     bottomLeft: Radius.circular(50))),
             child: ProfileInfo(),
-          )
+          ),
+
+          const SizedBox(height: 30),
+
+
         ],
       )),
     );
