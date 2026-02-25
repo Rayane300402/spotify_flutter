@@ -16,6 +16,6 @@ class UserData {
 
 extension UserDataX on UserData {
   User toEntity() {
-    return User(fullName: fullName!, email: email! );
+    return User(fullName: fullName!, email: email!, profileImg: profileImg );
   }
 }

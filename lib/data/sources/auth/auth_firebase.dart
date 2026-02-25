@@ -84,9 +84,11 @@ class AuthFirebaseService extends AuthFirebase {
           firebaseAuth.currentUser?.uid
       ).get();
 
-      UserData userData = UserData.fromJson(user.data()!);
-
+      UserData userData = UserData.fromJson(user.data() !);
+print('image ${firebaseAuth.currentUser?.photoURL}');
       userData.profileImg = firebaseAuth.currentUser?.photoURL ?? 'https://cdn-icons-png.flaticon.com/512/10542/10542486.png';
+
+      print('userData : ${userData.profileImg}');
 
       User userEntity = userData.toEntity();
 

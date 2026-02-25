@@ -5,6 +5,7 @@ import 'package:spotify_futter/data/sources/auth/auth_firebase.dart';
 import 'package:spotify_futter/data/sources/songs/songs_db_service.dart';
 import 'package:spotify_futter/domain/repo/auth/auth_repo.dart';
 import 'package:spotify_futter/domain/repo/song/song.dart';
+import 'package:spotify_futter/domain/usecases/auth/getUser.dart';
 import 'package:spotify_futter/domain/usecases/auth/register.dart';
 import 'package:spotify_futter/domain/usecases/auth/signin.dart';
 import 'package:spotify_futter/domain/usecases/songs/get_playlist.dart';
@@ -57,6 +58,10 @@ Future<void> initDep() async{
 
   sL.registerSingleton<IsFavUseCase>(
     IsFavUseCase()
+  );
+
+  sL.registerSingleton<GetUserUseCase>(
+      GetUserUseCase()
   );
 
 }
