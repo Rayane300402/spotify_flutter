@@ -53,7 +53,7 @@ class SongsBox extends StatelessWidget {
                         child: Align(
                             alignment: Alignment.bottomRight,
                             child: StartBtn(
-                              onTap: () {},
+                              song: songs[index],
                               height: 40,
                               width: 40,
                               isNews: true,

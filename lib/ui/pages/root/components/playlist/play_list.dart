@@ -39,7 +39,7 @@ class PlayList extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 15),
                       child: StartBtn(
-                        onTap: () {},
+                        song: songs[index],
                         height: 45,
                         width: 45,
                         isNews: false,

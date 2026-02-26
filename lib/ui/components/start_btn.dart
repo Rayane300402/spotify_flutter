@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:spotify_futter/domain/entities/song/song.dart';
 import 'package:spotify_futter/utils/is_dark.dart';
 
 import '../../core/configs/assets/images.dart';
 import '../../core/configs/theme/palette.dart';
+import '../pages/song_player/song_player.dart';
+import 'bloc/favorite_cubit.dart';
 
 class StartBtn extends StatelessWidget {
-  void Function()? onTap;
+  SongEntity song;
   double? height;
   double? width;
   final bool isNews;
 
-  StartBtn({super.key, required this.onTap, required this.height, required this.width, required this.isNews});
+  StartBtn({super.key, required this.song, required this.height, required this.width, required this.isNews});
 
   @override
   Widget build(BuildContext context) {
     return  GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => BlocProvider.value(
+                value: context.read<FavoritesCubit>(),
+                child: SongPlayer(song: song),
+              ),
+            ));
+      },
       child: Container(
         height: height,
         width: width,
