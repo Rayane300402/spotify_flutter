@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:spotify_futter/core/configs/theme/palette.dart';
@@ -70,12 +71,15 @@ class ChooseModePage extends StatelessWidget {
                 SizedBox(height: 50),
                 CustomButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => const SignupOrSignin(),
-                      ),
-                    );
+                    final user = FirebaseAuth.instance.currentUser;
+                    if (user != null) {
+                      Navigator.pop(context);
+                    } else {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (_) => const SignupOrSignin()),
+                      );
+                    }
                   },
                   title: 'Continue',
                   height: 80,

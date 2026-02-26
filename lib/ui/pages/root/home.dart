@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:spotify_futter/ui/components/bloc/favorite_cubit.dart';
+import 'package:spotify_futter/ui/pages/introduction/introduction.dart';
 import 'package:spotify_futter/ui/pages/profile/profile.dart';
 import 'package:spotify_futter/ui/pages/root/components/home_artist_card.dart';
 import 'package:spotify_futter/ui/pages/root/components/news_section.dart';
@@ -13,6 +14,9 @@ import 'package:spotify_futter/utils/is_dark.dart';
 import '../../../core/configs/assets/vectors.dart';
 import '../../../core/configs/theme/palette.dart';
 import '../../components/back_button.dart';
+import '../choose_mode/bloc.dart';
+
+enum _HomeMenuAction { toggleTheme, logout }
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -73,13 +77,64 @@ class _HomePageState extends State<HomePage>
                         Vectors.logo,
                         height: 40,
                       ),
-                      action: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.more_vert,
-                            size: 35,
-                            color: context.isDarkMode ? Palette.grey : Colors.black,
-                          )),
+                      action: PopupMenuButton<_HomeMenuAction>(
+                        offset: const Offset(0, 50),
+                        color: context.isDarkMode ? Color(0xFF262525) : Color(0xFFF2F2F2),
+                        elevation: 8,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(10)),
+                        icon: Icon(
+                          Icons.more_vert,
+                          size: 35,
+                          color: context.isDarkMode ? Palette.grey : Colors.black,
+                        ),
+                        onSelected: (value) async {
+                          switch (value) {
+                            case _HomeMenuAction.toggleTheme:
+                              final modeCubit = context.read<ModeCubit>();
+                              final isDark = modeCubit.state == ThemeMode.dark;
+                              modeCubit.switchMode(isDark ? ThemeMode.light : ThemeMode.dark);
+                              break;
+
+                            case _HomeMenuAction.logout:
+                              await FirebaseAuth.instance.signOut();
+
+                              if (!mounted) return;
+
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(builder: (_) => const Introduction()),
+                                    (route) => false,
+                              );
+                              break;
+                          }
+                        },
+                        itemBuilder: (context) => [
+                          PopupMenuItem(
+                            value: _HomeMenuAction.toggleTheme,
+                            child: Row(
+                              children: [
+                                Icon(
+                                  context.isDarkMode ? Icons.light_mode : Icons.dark_mode,
+                                  size: 20,
+                                ),
+                                const SizedBox(width: 10),
+                                Text(context.isDarkMode ? 'Light mode' : 'Dark mode'),
+                              ],
+                            ),
+                          ),
+                          const PopupMenuDivider(),
+                          const PopupMenuItem(
+                            value: _HomeMenuAction.logout,
+                            child: Row(
+                              children: [
+                                Icon(Icons.logout, size: 20),
+                                SizedBox(width: 10),
+                                Text('Log out'),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   Expanded(
