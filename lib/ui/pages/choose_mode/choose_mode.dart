@@ -70,7 +70,7 @@ class ChooseModePage extends StatelessWidget {
                 SizedBox(height: 50),
                 CustomButton(
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (BuildContext context) => const SignupOrSignin(),
